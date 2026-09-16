@@ -1,10 +1,11 @@
-# GET THE POINT CSS Architecture — v7
+# DECISIONS, DECISIONS CSS Architecture — v7
 
 ## Active product CSS
 
 - `css/tokens.css` — canonical product colors, spacing, radii, shadows, type stack, compatibility aliases.
 - `css/site.css` — canonical shared public marketing/prelaunch components and layouts.
-- `css/home.css` — homepage-only composition for hero staging, mobile fold, route shelf, and other page-specific arrangements. It must reuse shared tokens/components rather than redefine them.
+- `css/home.css` — homepage-only composition for the stacked DECISIONS, DECISIONS hero, product staging, mobile fold, route shelf, and other page-specific arrangements. It must reuse shared tokens/components rather than redefine them.
+- `css/navigation.css` — shared desktop/mobile navigation and drawer behavior.
 - `css/game.css` — canonical PWA/game styling, including setup, handoff, choice, HUM/SOUND, DRAW, MIME, results, modals and responsive states.
 - `css/game-smart-card.css` — isolated **PROPOSED / NEEDS PLAYTESTING** active-turn challenger layered after `css/game.css` for the current smart-card experiment.
 
@@ -13,9 +14,15 @@ Compatibility entrypoints:
 - `play.css` imports the canonical game files for old links/bookmarks.
 - `play-polish.css` and `play-performance.css` are intentionally retired. Do not add rules to them.
 
+## Brand-structure rule
+
+Permanent identity remains black/cream-led. Teal/yellow/purple are current method-signal challengers and must not become hard dependencies of the wordmark, favicon, or permanent brand mark.
+
+The stacked `DECISIONS, / DECISIONS` treatment may use restrained line displacement and a three-way branch motif. Avoid visual treatments that turn the interface into a literal flowchart or decision-training product.
+
 ## Page-composition rule
 
-A page-specific stylesheet is allowed only when it owns composition unique to that page rather than overriding shared component behavior. `css/home.css` is the current example: it may arrange the homepage hero, physical-card staging, mobile route shelf, and homepage-specific responsive rhythm. Shared buttons, forms, typography tokens, navigation, route colors, and reusable component definitions remain owned by `css/site.css`, `css/navigation.css`, or `css/tokens.css`.
+A page-specific stylesheet is allowed only when it owns composition unique to that page rather than overriding shared component behavior. `css/home.css` is the current example: it may arrange the homepage wordmark, physical-card staging, mobile route shelf, and homepage-specific responsive rhythm. Shared buttons, forms, typography tokens, navigation, route colors, and reusable component definitions remain owned by `css/site.css`, `css/navigation.css`, or `css/tokens.css`.
 
 Do not use page-specific files as dated patch layers.
 
@@ -48,3 +55,4 @@ Do not create additional dated/stacked override files around it.
 9. Canonical HUM/DRAW/MIME styling belongs in `css/game.css`; smart-card-specific challenger deltas belong only in `css/game-smart-card.css` while that experiment is active.
 10. Do not create generic or dated override stylesheets. Refactor the owning canonical component, use a narrowly scoped page-composition file when the layout is unique to that page, or extend the existing explicitly sanctioned challenger layer.
 11. Experimental UI must not create alternate scoring, timer, persistence, or route-selection state paths.
+12. The title may change again if legal validation requires it; keep identity strings centralized and avoid encoding the commercial name into game-state logic.
