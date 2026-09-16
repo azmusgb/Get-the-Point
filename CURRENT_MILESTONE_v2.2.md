@@ -6,4 +6,6 @@ The current engineering milestone that precedes that product proof is:
 
 > **Pass production acceptance on real iPhone Safari and installed iOS PWA, freeze the browser build, then collect controlled blind-play evidence without product drift.**
 
+Automated protection now has three layers: static release invariants, synthetic browser acceptance, and a live-Netlify production contract smoke. These support—but do not replace—the physical-device gate in GitHub Issue #11.
+
 The site/brand migration itself is complete. Broad redesign is not the current priority unless playtest evidence identifies a specific problem.
