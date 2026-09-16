@@ -17,6 +17,8 @@
     report.push(test('Secure context', window.isSecureContext ? 'pass' : 'fail', window.isSecureContext ? 'HTTPS security context is active.' : 'The demo should run over HTTPS.'));
     report.push(test('JavaScript runtime', 'pass', `JavaScript is active (${navigator.userAgentData ? 'UA-CH available' : 'standard UA'}).`));
 
+    // Keep the historical storage key stable so existing testers do not lose
+    // diagnostics state solely because the visible commercial working title changed.
     const localStorageWorks = safe(() => {
       const key = 'gtp.diag.test';
       localStorage.setItem(key, 'ok');
@@ -58,7 +60,7 @@
     }
 
     try {
-      const response = await fetch('/play.js?v=8', { cache: 'no-store' });
+      const response = await fetch('/play.js?v=12', { cache: 'no-store' });
       report.push(test('Game runtime asset', response.ok ? 'pass' : 'fail', response.ok ? 'Core game JavaScript is reachable.' : `play.js returned HTTP ${response.status}.`));
     } catch (error) {
       report.push(test('Game runtime asset', 'fail', `Request failed: ${error?.message || 'network error'}`));
@@ -105,7 +107,7 @@
 
   async function copyReport() {
     const text = [
-      'GET THE POINT — Playtest Diagnostics',
+      'DECISIONS, DECISIONS — Playtest Diagnostics',
       new Date().toISOString(),
       '',
       ...lastReport.map(r => `[${r.status.toUpperCase()}] ${r.name}: ${r.detail}`),
