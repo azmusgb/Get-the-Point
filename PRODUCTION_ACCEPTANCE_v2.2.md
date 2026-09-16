@@ -10,13 +10,24 @@ This layer verifies the live Netlify deployment after changes reach `main`. It c
 - `ONE PROMPT. THREE WAYS TO PLAY.` is present,
 - former lead identity does not leak onto the public homepage,
 - How / Playtest / FAQ / About routes resolve with current v2.2 copy,
-- the playtest-interest form declaration is present,
+- the live playtest recruitment surface contains the expected participant fields, success action, and CTA,
 - root security headers include no-sniff, same-origin framing, and disabled camera/microphone/geolocation,
 - `/play`, `/diagnostics`, `/analysis`, and `/feedback` reject unauthorized access and redirect to `/demo-access`,
 - protected redirects remain no-store and noindex/nofollow,
 - the access page carries the current identity, CSP, no-cache/no-store behavior, noindex/nofollow, and disabled device permissions,
 - the manifest uses `DECISIONS, DECISIONS — Private Playtest`, short name `Decisions`, and `/play` start URL,
 - the service worker remains no-cache/no-store with root scope.
+
+## Netlify forms boundary
+
+Netlify may consume or rewrite authoring-only form attributes during deploy post-processing. Therefore the live HTML smoke does **not** treat `data-netlify` or the original form `name` attribute as durable served-HTML contracts.
+
+Form registration is covered by two independent layers:
+
+1. repository/static release invariants protect the source form declarations; and
+2. Netlify project metadata is checked operationally to confirm recognized forms and fields.
+
+The live production smoke checks the rendered recruitment surface but deliberately does not submit a production form.
 
 ## CI behavior
 
