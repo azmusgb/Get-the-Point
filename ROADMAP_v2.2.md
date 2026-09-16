@@ -6,11 +6,13 @@
 
 ## P0 — production acceptance
 
-1. Merge the v2.2 browser acceptance layer once CI is green.
-2. Complete GitHub Issue #11 on real iPhone Safari and installed iOS PWA.
-3. Verify end-to-end telemetry export → local analysis → structured Netlify feedback.
-4. Fix only blockers, accessibility defects, telemetry-integrity defects, or severe usability issues.
-5. Freeze the browser build for controlled blind testing.
+1. Keep the static release verifier green.
+2. Keep the synthetic browser matrix green across Chromium desktop, WebKit phone, WebKit short phone, and coarse-pointer tablet.
+3. Keep the live-Netlify production contract smoke green on every `main` push.
+4. Complete GitHub Issue #11 on a physical iPhone Safari session and installed iOS PWA.
+5. Verify end-to-end telemetry export → local analysis → structured Netlify feedback.
+6. Fix only blockers, accessibility defects, telemetry-integrity defects, security/privacy defects, or severe usability issues.
+7. Freeze the browser build for controlled blind testing.
 
 ## P0 — first controlled evidence cycle
 
