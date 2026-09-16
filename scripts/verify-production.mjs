@@ -44,6 +44,7 @@ async function waitForCurrentPublicSurface() {
 }
 
 async function verifyPublicSurface() {
+  console.log('Checking live public surface...');
   const { response, text } = await waitForCurrentPublicSurface();
   expectHeader(response, 'cache-control', value => /no-cache|no-store/i.test(value), 'home cache policy');
   expectHeader(response, 'x-content-type-options', value => value.toLowerCase() === 'nosniff', 'home security policy');
@@ -65,10 +66,16 @@ async function verifyPublicSurface() {
 
   const playtest = await request('/playtest', { redirect: 'follow' });
   assert(playtest.text.includes('name="playtest-interest"'), 'playtest form missing expected form name');
-  assert(playtest.text.includes('data-netlify="true"'), 'playtest form missing Netlify form declaration');
+  // Netlify consumes data-netlify="true" during deploy post-processing. Verify the
+  // durable generated form contract instead of expecting the build-time marker.
+  assert(playtest.text.includes('name="form-name"'), 'playtest form missing Netlify form-name field');
+  assert(playtest.text.includes('value="playtest-interest"'), 'playtest form-name field has unexpected value');
+  assert(playtest.text.includes('action="/thanks"'), 'playtest form missing expected success action');
+  console.log('Live public surface contract passed.');
 }
 
 async function verifyPrivateAccessBoundary() {
+  console.log('Checking live private-access boundary...');
   for (const path of ['/play', '/diagnostics', '/analysis', '/feedback']) {
     const { response } = await request(path, { redirect: 'manual' });
     assert(response.status === 303, `${path} expected unauthorized 303, got ${response.status}`);
@@ -85,9 +92,11 @@ async function verifyPrivateAccessBoundary() {
   expectHeader(access.response, 'x-robots-tag', value => /noindex/i.test(value) && /nofollow/i.test(value), 'demo access robots policy');
   expectHeader(access.response, 'content-security-policy', value => value.includes("default-src 'self'") && value.includes("object-src 'none'"), 'demo access CSP');
   expectHeader(access.response, 'permissions-policy', value => value.includes('camera=()') && value.includes('microphone=()') && value.includes('geolocation=()'), 'demo access permissions policy');
+  console.log('Live private-access boundary passed.');
 }
 
 async function verifyPwaContract() {
+  console.log('Checking live PWA contract...');
   const manifest = await request('/manifest.webmanifest', { redirect: 'follow' });
   assert(manifest.response.status === 200, `manifest expected 200, got ${manifest.response.status}`);
   const data = JSON.parse(manifest.text);
@@ -100,6 +109,7 @@ async function verifyPwaContract() {
   assert(sw.response.status === 200, `service worker expected 200, got ${sw.response.status}`);
   expectHeader(sw.response, 'cache-control', value => /no-cache|no-store/i.test(value), 'service worker cache policy');
   expectHeader(sw.response, 'service-worker-allowed', value => value === '/', 'service worker scope');
+  console.log('Live PWA contract passed.');
 }
 
 async function main() {
@@ -107,7 +117,7 @@ async function main() {
   await verifyPublicSurface();
   await verifyPrivateAccessBoundary();
   await verifyPwaContract();
-  console.log('Production smoke passed: public identity, Netlify access boundary, security headers, forms declaration, and PWA contract are live.');
+  console.log('Production smoke passed: public identity, Netlify access boundary, security headers, durable form contract, and PWA contract are live.');
 }
 
 main().catch(error => {
