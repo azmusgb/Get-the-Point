@@ -1,12 +1,12 @@
 'use strict';
-const CACHE = 'gtp-pwa-v17-ux-content-evolution';
+const CACHE = 'dd-pwa-v18-decisions-decisions-web-v2-2';
 const CORE = [
   '/css/tokens.css?v=10',
   '/css/game.css?v=10',
   '/css/game-smart-card.css?v=1',
-  '/css/navigation.css?v=12',
+  '/css/navigation.css?v=13',
   '/css/diagnostics.css?v=10',
-  '/site-nav.js?v=12',
+  '/site-nav.js?v=13',
   '/play-runtime.js?v=10',
   '/play.js?v=12',
   '/playtest-enhancements.js?v=11',
@@ -16,12 +16,15 @@ const CORE = [
   '/icon.svg'
 ];
 
-/* The visual-system upgrade keeps public asset URLs stable for compatibility.
-   Delete those shared entries before precaching so an installed PWA cannot
-   pin an older token/navigation stylesheet behind the existing cache name. */
+/* Brand-system releases keep most public asset URLs stable for compatibility.
+   Delete shared entries before precaching so an installed PWA cannot pin an
+   older identity/navigation asset behind a previously populated cache. */
 const REFRESH_ON_INSTALL = [
   '/css/tokens.css?v=10',
-  '/css/navigation.css?v=12'
+  '/css/navigation.css?v=13',
+  '/site-nav.js?v=13',
+  '/manifest.webmanifest',
+  '/icon.svg'
 ];
 
 self.addEventListener('install', event => {
