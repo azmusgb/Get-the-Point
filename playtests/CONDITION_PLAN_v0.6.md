@@ -1,4 +1,4 @@
-# GET THE POINT — v0.6 Staged Condition Plan
+# DECISIONS, DECISIONS — v0.6 Staged Condition Plan
 
 Status: **PROPOSED / NEEDS PLAYTESTING**
 
@@ -15,6 +15,12 @@ During a block:
 - preserve invalid sessions for defect discovery but exclude them from primary comparisons.
 
 If a material game/rule fix is deployed, start a new build cohort rather than silently mixing pre-fix and post-fix sessions.
+
+## Cross-block product signal: decision tension
+
+Regardless of the active condition, record whether prompts create a meaningful route tradeoff. The title and mechanic only work together when players have a real choice to make.
+
+Do **not** treat longer hesitation as automatically better. Review choice time with displayed points, route share, success/guess time, and post-game feedback about whether multiple routes felt tempting.
 
 ## Control condition
 
@@ -49,7 +55,8 @@ Primary observations:
 - prompt-level audio failures,
 - “impossible” reactions,
 - whether SOUND becomes a generic sound-effect shortcut,
-- whether HUM creates song-recall friction unrelated to the core risk/reward decision.
+- whether HUM creates song-recall friction unrelated to the core risk/reward decision,
+- whether either audio condition materially improves or destroys decision tension.
 
 Do not pick a winner from one or two sessions. If signal is mixed, replicate rather than forcing a decision.
 
@@ -73,7 +80,8 @@ Primary observations:
 - accidental rushed route taps,
 - route diversity,
 - total successful prompts per turn,
-- whether reveal-start makes the decision itself exciting or merely punitive.
+- whether reveal-start makes the decision itself exciting or merely punitive,
+- whether point tradeoffs still register under pressure.
 
 The desired outcome is not automatically the faster condition. The decision should feel urgent **and meaningful**.
 
@@ -97,6 +105,7 @@ Primary observations:
 - skip utilization,
 - time spent evaluating an impossible-looking prompt,
 - whether skip becomes an automatic optimization rather than a safety valve,
+- whether skips mask cards with weak decision tension,
 - replay interest.
 
 A skip rule should not hide weak content. Continue logging the skipped prompt so the content can be cut if necessary.
@@ -115,7 +124,7 @@ Keep this baseline fixed while Blocks A–C run. Separately observe whether shor
 
 ### Point values
 
-Treat displayed points as hypotheses. Do not re-score after every session. Accumulate repeated prompt × route evidence first, then make a deliberate calibration pass.
+Treat displayed points as hypotheses. Do not re-score after every session. Accumulate repeated prompt × route evidence first, including choice-time and decision-tension evidence, then make a deliberate calibration pass.
 
 ---
 
