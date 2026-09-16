@@ -29,6 +29,7 @@ jobs:
           node --check analysis.js
           node --check demo-access.js
           node --check sw.js
+          node --check scripts/verify-production.mjs
       - name: Verify product and release invariants
         run: node scripts/verify-release.mjs
 
@@ -56,3 +57,20 @@ jobs:
             test-results
           if-no-files-found: ignore
           retention-days: 7
+
+  production-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [verify, browser-smoke]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify live Netlify production contract
+        env:
+          PRODUCTION_BASE_URL: https://get-the-point.netlify.app
+          PRODUCTION_SMOKE_ATTEMPTS: '12'
+          PRODUCTION_SMOKE_RETRY_MS: '5000'
+        run: node scripts/verify-production.mjs
