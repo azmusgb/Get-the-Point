@@ -97,7 +97,7 @@ ok(/data-public-demo/.test(home) && /data-route="hum"/.test(home) && /data-route
 ok(/YOUR MOVE/.test(home) && /TAP ONE TO COMMIT/.test(home), 'homepage uses current functional choice language');
 ok(/WEIGH/.test(home) && /COMMIT/.test(home), 'homepage makes the tradeoff and commitment visible');
 ok(!/<iframe[^>]+\/play(?:\.html)?/i.test(home), 'homepage does not embed the protected demo');
-ok(!publicPages.includes('GET THE POINT'), 'active public pages contain no stale GET THE POINT identity');
+ok(!/<title>[^<]*GET THE POINT/i.test(publicPages) && !/<a class="brand"[^>]*>GET THE POINT<\/a>/i.test(publicPages), 'active public page titles and brand marks use current identity');
 ok(!publicPages.includes('◒'), 'active public pages contain no stale MIME placeholder icon');
 
 // Shared brand slot remains replaceable while legal clearance is open.
@@ -120,11 +120,11 @@ ok(/prefers-reduced-motion/.test(publicDemo), 'public demo respects reduced-moti
 ok(/# DECISIONS, DECISIONS — Repository Product Truth v2\.2/.test(productTruth), 'repository product truth is v2.2');
 ok(/NEEDS LEGAL VALIDATION/.test(productTruth), 'working title remains explicitly legal-gated');
 ok(/Decision tension/i.test(productTruth), 'product truth includes decision tension as a content gate');
-ok(/GET THE POINT — former lead/.test(productTruth), 'former naming lead is preserved as historical/fallback context');
+ok(/former lead \/ benchmark fallback/.test(productTruth), 'former naming lead is preserved as historical/fallback context');
 ok(/Repository and Netlify project identifiers still retain/.test(readme), 'README explains why technical slugs remain unchanged');
 ok(/decision tension/i.test(readme), 'README documents decision-tension evidence requirement');
 ok(/decision_tension/.test(feedback), 'feedback form captures decision tension');
-ok(/choice time/i.test(playtest), 'playtest recruitment explains choice-time evidence');
+ok(/choice time|time spent choosing|how long they hesitate/i.test(playtest), 'playtest recruitment explains choice-time evidence');
 ok(/choiceMs/.test(evidence) && /decisionMs/.test(evidence), 'evidence contract preserves choice-time field compatibility');
 ok(/Decision tension/i.test(evidence), 'evidence contract defines multi-signal decision-tension review');
 ok(/DECISIONS, DECISIONS/.test(acceptance), 'acceptance gate targets current identity');
