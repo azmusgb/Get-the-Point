@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101112">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Local-only GET THE POINT playtest telemetry analysis.">
+  <meta name="description" content="Local-only DECISIONS, DECISIONS playtest telemetry analysis, including route choice, choice time, outcomes, and prompt triage.">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/tokens.css?v=12">
   <link rel="stylesheet" href="/css/site.css?v=12">
-  <link rel="stylesheet" href="/css/navigation.css?v=12">
+  <link rel="stylesheet" href="/css/navigation.css?v=13">
   <link rel="stylesheet" href="/css/analysis.css?v=1">
-  <title>Playtest Analysis — GET THE POINT</title>
+  <title>Playtest Analysis — DECISIONS, DECISIONS</title>
 </head>
 <body>
-  <header class="site-header"><div class="wrap nav"><a class="brand" href="/">GET THE POINT</a><nav class="nav-links" aria-label="Main navigation"></nav></div></header>
+  <header class="site-header"><div class="wrap nav"><a class="brand" href="/" aria-label="DECISIONS, DECISIONS home">DECISIONS, DECISIONS</a><nav class="nav-links" aria-label="Main navigation"></nav></div></header>
   <main class="analysis-shell">
     <section class="analysis-hero wrap">
       <div>
         <div class="eyebrow">PRIVATE PLAYTEST TOOL · v0.6</div>
         <h1>EVIDENCE,<br>NOT VIBES.</h1>
-        <p>Drop one or more exported GET THE POINT telemetry JSON files here. Analysis happens entirely in this browser; files are not uploaded.</p>
+        <p>Drop one or more exported DECISIONS, DECISIONS telemetry JSON files here. Analysis happens entirely in this browser; files are not uploaded. Choice time is treated as first-class evidence because meaningful hesitation is part of the mechanic.</p>
       </div>
       <div class="analysis-drop" id="dropZone">
         <input id="files" type="file" accept="application/json,.json" multiple>
@@ -40,7 +40,7 @@
         <section class="analysis-card"><div class="card-head"><h3>Route outcomes</h3><span>Observed, not calibrated difficulty</span></div><div id="routeOutcomes"></div></section>
       </div>
       <section class="analysis-card analysis-wide">
-        <div class="card-head"><h3>Prompt triage</h3><span>Automatic flags are review cues, not deletion decisions</span></div>
+        <div class="card-head"><h3>Prompt + decision-tension triage</h3><span>Choice time and route dominance are review cues, not automatic deletion decisions</span></div>
         <div class="table-wrap"><table><thead><tr><th>Prompt</th><th>Attempts</th><th>Correct</th><th>Success</th><th>Pass/timeout</th><th>Top route</th><th>Flag</th></tr></thead><tbody id="promptRows"></tbody></table></div>
       </section>
       <div class="analysis-grid">
@@ -53,7 +53,7 @@
       </section>
     </section>
   </main>
-  <script src="/site-nav.js?v=12" defer></script>
+  <script src="/site-nav.js?v=13" defer></script>
   <script src="/analysis.js?v=2" defer></script>
 </body>
 </html>

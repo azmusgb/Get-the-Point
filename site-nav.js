@@ -1,6 +1,10 @@
 (() => {
   'use strict';
 
+  const BRAND = 'DECISIONS, DECISIONS';
+  const LEGACY_BRAND = 'GET THE POINT';
+  const LEGACY_BRAND_TITLE = 'Get the Point';
+
   const PRIMARY = [
     ['How it works', '/how'],
     ['Playtest', '/playtest'],
@@ -22,11 +26,66 @@
     return normalized || '/';
   }
 
+  function replaceLegacyBrand(value) {
+    return String(value ?? '')
+      .replaceAll(LEGACY_BRAND, BRAND)
+      .replaceAll(LEGACY_BRAND_TITLE, 'Decisions, Decisions');
+  }
+
+  function applyBrandIdentity(root = document) {
+    if (document.title.includes(LEGACY_BRAND) || document.title.includes(LEGACY_BRAND_TITLE)) {
+      document.title = replaceLegacyBrand(document.title);
+    }
+
+    document.querySelectorAll('meta[name="description"],meta[name="apple-mobile-web-app-title"],meta[property="og:title"],meta[property="og:description"]').forEach(meta => {
+      const current = meta.getAttribute('content') || '';
+      const next = replaceLegacyBrand(current);
+      if (next !== current) meta.setAttribute('content', next);
+    });
+
+    const scope = root instanceof Element || root instanceof Document ? root : document;
+    scope.querySelectorAll?.('.site-header .brand,.site-drawer .brand').forEach(brand => {
+      if (brand.textContent !== BRAND) brand.textContent = BRAND;
+      if (brand instanceof HTMLAnchorElement) brand.setAttribute('aria-label', `${BRAND} home`);
+    });
+
+    // The private PWA home screen is rendered dynamically by play.js. Keep the
+    // brand slot replaceable without coupling game state to a commercial title.
+    document.querySelectorAll('.home-brand h1.brand').forEach(mark => {
+      const expected = '<span class="line">DECISIONS,</span><span class="line">DECISIONS</span>';
+      if (mark.innerHTML !== expected) mark.innerHTML = expected;
+      mark.setAttribute('aria-label', BRAND);
+    });
+
+    // Fallback for current public/development pages that still contain the old
+    // working title in static text. Historical /legacy pages do not load this shell.
+    const walker = document.createTreeWalker(
+      scope instanceof Document ? scope.body : scope,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+          return node.nodeValue?.includes(LEGACY_BRAND) || node.nodeValue?.includes(LEGACY_BRAND_TITLE)
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT;
+        }
+      }
+    );
+
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const next = replaceLegacyBrand(node.nodeValue);
+      if (next !== node.nodeValue) node.nodeValue = next;
+    });
+  }
+
   function ensureStyles() {
     if (document.querySelector('link[href*="navigation.css"]')) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/css/navigation.css?v=12';
+    link.href = '/css/navigation.css?v=13';
     document.head.appendChild(link);
   }
 
@@ -58,7 +117,7 @@
       ? '<span class="site-drawer-label">PLAYTEST TOOLS</span><a href="/play">Play demo</a><a href="/diagnostics">Device diagnostics</a><a href="/analysis">Analyze telemetry</a><a href="/feedback">Session feedback</a><a class="site-drawer-private" href="/demo-access?logout=1">Lock demo on this device</a>'
       : '';
 
-    return `<div class="site-drawer-backdrop" data-site-drawer-backdrop hidden></div><aside id="siteDrawer" class="site-drawer" data-site-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Site menu" inert><div class="site-drawer-head"><a class="brand" href="/">GET THE POINT</a><button class="site-drawer-close" type="button" aria-label="Close menu">×</button></div><nav aria-label="Site menu"><span class="site-drawer-label">PLAY + LEARN</span>${MOBILE_PRIMARY.map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}<span class="site-drawer-label">MORE</span>${MORE.map(([label, href]) => `<a href="${href}"${href === '/play' ? ' class="site-drawer-private"' : ''}>${label}</a>`).join('')}<a class="site-drawer-feature" href="/playtest#signup">Join a playtest</a>${demoTools}</nav><div class="site-drawer-foot"><span>ONE PROMPT. THREE WAYS TO PLAY.</span></div></aside>`;
+    return `<div class="site-drawer-backdrop" data-site-drawer-backdrop hidden></div><aside id="siteDrawer" class="site-drawer" data-site-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Site menu" inert><div class="site-drawer-head"><a class="brand" href="/" aria-label="${BRAND} home">${BRAND}</a><button class="site-drawer-close" type="button" aria-label="Close menu">×</button></div><nav aria-label="Site menu"><span class="site-drawer-label">PLAY + LEARN</span>${MOBILE_PRIMARY.map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}<span class="site-drawer-label">MORE</span>${MORE.map(([label, href]) => `<a href="${href}"${href === '/play' ? ' class="site-drawer-private"' : ''}>${label}</a>`).join('')}<a class="site-drawer-feature" href="/playtest#signup">Join a playtest</a>${demoTools}</nav><div class="site-drawer-foot"><span>ONE PROMPT. THREE WAYS TO PLAY.</span></div></aside>`;
   }
 
   function setupHeader() {
@@ -73,6 +132,12 @@
       links.className = 'nav-links';
       links.setAttribute('aria-label', 'Main navigation');
       nav.appendChild(links);
+    }
+
+    const brand = nav.querySelector('.brand');
+    if (brand) {
+      brand.textContent = BRAND;
+      brand.setAttribute('aria-label', `${BRAND} home`);
     }
 
     links.innerHTML = navMarkup();
@@ -191,13 +256,31 @@
     if (MORE.some(([, href]) => normalizePath(href) === path)) document.querySelector('.site-more summary')?.classList.add('is-current');
   }
 
+  function watchDynamicBrand() {
+    const app = document.getElementById('app');
+    if (!app) return;
+    let scheduled = false;
+    const observer = new MutationObserver(() => {
+      if (scheduled) return;
+      scheduled = true;
+      queueMicrotask(() => {
+        scheduled = false;
+        applyBrandIdentity(app);
+      });
+    });
+    observer.observe(app, { childList: true, subtree: true, characterData: true });
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     ensureStyles();
+    applyBrandIdentity();
     setupSkipLink();
     setupHeader();
     setupGameMenu();
     setupDrawer();
     setupMoreMenu();
     markCurrent();
+    applyBrandIdentity();
+    watchDynamicBrand();
   });
 })();

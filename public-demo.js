@@ -21,6 +21,7 @@
   const methodButtons = [...root.querySelectorAll('[data-route]')];
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   let index = 0;
+  let revealedAt = performance.now();
 
   function current() {
     return prompts[index % prompts.length];
@@ -56,8 +57,9 @@
     if (reset) {
       card.classList.remove('is-committed');
       card.removeAttribute('data-selected-route');
-      status.innerHTML = '<span>CHOOSE ONE</span><strong>TAP ONE TO CHOOSE</strong>';
+      status.innerHTML = '<span>YOUR MOVE</span><strong>TAP ONE TO COMMIT</strong>';
       setNextState(false);
+      revealedAt = performance.now();
     }
   }
 
@@ -66,8 +68,10 @@
     if (!route || card.classList.contains('is-committed')) return;
 
     const points = current()[route];
+    const choiceMs = Math.max(0, Math.round(performance.now() - revealedAt));
     card.classList.add('is-committed');
     card.dataset.selectedRoute = route;
+    card.dataset.choiceMs = String(choiceMs);
 
     methodButtons.forEach(item => {
       const selected = item === button;
@@ -77,8 +81,13 @@
       if (!selected) item.setAttribute('tabindex', '-1');
     });
 
-    status.innerHTML = `<span>${label[route]} · ${points} ${points === 1 ? 'PT' : 'PTS'}</span><strong>CHOICE LOCKED · GET THEM TO GUESS</strong>`;
+    status.innerHTML = `<span>${label[route]} · ${points} ${points === 1 ? 'PT' : 'PTS'}</span><strong>LOCKED IN · GET THEM TO GUESS</strong>`;
     setNextState(true);
+
+    root.dispatchEvent(new CustomEvent('decisiondemo:committed', {
+      bubbles: true,
+      detail: { prompt: current().prompt, route, points, choiceMs }
+    }));
   }
 
   methodButtons.forEach(button => {

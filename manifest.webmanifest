@@ -1,8 +1,8 @@
 {
   "id": "/play",
-  "name": "GET THE POINT — Private Playtest",
-  "short_name": "Get the Point",
-  "description": "Private pass-and-play prototype for GET THE POINT — one prompt, three ways to play.",
+  "name": "DECISIONS, DECISIONS — Private Playtest",
+  "short_name": "Decisions",
+  "description": "Private pass-and-play prototype for DECISIONS, DECISIONS — one prompt, three ways to play, one choice under time pressure.",
   "start_url": "/play",
   "scope": "/",
   "display": "standalone",

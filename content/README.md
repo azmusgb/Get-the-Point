@@ -1,4 +1,4 @@
-# GET THE POINT — Content Candidate Pipeline
+# DECISIONS, DECISIONS — Content Candidate Pipeline
 
 Status: **PROPOSED / NEEDS PLAYTESTING**
 
@@ -33,11 +33,26 @@ A prompt should move toward validated core content only after playtest evidence 
 2. Clear target / guess convergence.
 3. Audience and cultural fit for the intended pack.
 4. Scoring creates a real risk/reward choice.
-5. No accidental giveaway caused by prompt wording or route instructions.
-6. Rights-safe prompt/content usage.
-7. No persistent dead-card, pass, or dominant-route pattern.
+5. **Decision tension:** once the point values are considered, at least two routes are plausibly attractive often enough that the choice is meaningful rather than automatic.
+6. No accidental giveaway caused by prompt wording or route instructions.
+7. Rights-safe prompt/content usage.
+8. No persistent dead-card, pass, or dominant-route pattern.
 
 Do not rescue weak prompts by merely increasing points. Remove or redesign them.
+
+## Interpreting decision tension
+
+Decision tension is not equivalent to “long hesitation.” A healthy prompt can be chosen quickly when players understand the tradeoff. Review multiple signals together:
+
+- route selection share,
+- displayed point spread,
+- choice/decision time,
+- route success and guess time,
+- repeated one-route dominance,
+- participant comments that multiple routes felt tempting,
+- “obvious choice” reactions.
+
+A card should be reviewed when one route stays dominant regardless of points or when players repeatedly indicate that there was no real choice.
 
 ## Data to join back to prompts
 
@@ -54,7 +69,7 @@ For every attempt, retain when available:
 - round/timer condition,
 - HUM vs SOUND condition,
 - rule question / facilitator rescue,
-- dead-card reaction,
+- dead-card or obvious-choice reaction,
 - strong positive reaction,
 - replay interest at the session level.
 

@@ -1,14 +1,14 @@
-# GET THE POINT — Playtest Evidence Contract v0.6
+# DECISIONS, DECISIONS — Playtest Evidence Contract v0.6
 
 Status: **PROPOSED / NEEDS PLAYTESTING**
 
-This document defines the evidence we want to preserve while the rules remain experimental. It does **not** promote any unresolved mechanic to LOCKED.
+This document defines the evidence we want to preserve while the rules remain experimental. It does **not** promote any unresolved mechanic or the working commercial title to legally cleared status.
 
 ## Why this exists
 
-GET THE POINT succeeds or fails on observable behavior:
+DECISIONS, DECISIONS succeeds or fails on observable behavior:
 
-> **Do players notice the risk/reward choice, make different choices under time pressure, perform successfully often enough to stay engaged, and want another game?**
+> **Do players notice the risk/reward choice, experience a real tradeoff between routes, make different choices under time pressure, perform successfully often enough to stay engaged, and want another game?**
 
 The evidence model therefore separates three layers:
 
@@ -36,10 +36,10 @@ Preferred fields for every revealed prompt:
 | `timerStartMode` | Reveal vs commit cohort separation. |
 | `passMode` | One pre-commit skip vs none. |
 | `route` | HUM/SOUND, DRAW, or MIME. |
-| `displayedPoints` | Risk/reward presented to player. |
+| `displayedPoints` / `pointValue` | Risk/reward presented to player. |
 | `promptStartedAt` | Choice-time origin. |
 | `methodLockedAt` | Commitment timestamp. |
-| `choiceMs` | Derived reveal → commitment duration. |
+| `choiceMs` / `decisionMs` | Derived reveal → commitment duration. |
 | `outcome` | `correct`, `failed`, `timeout`, `pass-uncommitted`. |
 | `correctAt` | Guess-time endpoint when successful. |
 | `guessMs` | Derived commitment → correct duration. |
@@ -52,6 +52,7 @@ Preferred fields for every revealed prompt:
 - **Timeout after commitment is evidence against the selected route/prompt combination**, but should still be segmented from an explicit incorrect result if such a state is later introduced.
 - **Choice time is first-class evidence.** The product differentiator is choice under time pressure; losing this field would weaken the most important behavioral analysis.
 - **Displayed points must be retained.** Route selection without the offered point values cannot tell us whether risk/reward influenced behavior.
+- **Fast is not automatically good.** A consistently near-zero choice time can indicate that the card creates no meaningful tradeoff. Interpret choice time together with route mix, points, success, and qualitative comments.
 
 ---
 
@@ -86,10 +87,11 @@ Capture immediately after the game, before explaining design intent:
 2. What was the most fun part?
 3. What was confusing?
 4. Did the point values change what you chose?
-5. Was there a route you avoided? Why?
-6. Which prompt felt impossible or unfair?
-7. Would you play again?
-8. Who would you play this with?
+5. **How often did at least two routes feel genuinely tempting?**
+6. Was there a route you avoided? Why?
+7. Which prompt felt impossible, obvious, or unfair?
+8. Would you play again?
+9. Who would you play this with?
 
 Also capture:
 
@@ -98,6 +100,7 @@ Also capture:
 - attempts to switch after commitment,
 - facilitator rescues,
 - dead-card comments,
+- “obvious choice” comments,
 - spontaneous risk/reward discussion.
 
 ---
@@ -111,8 +114,22 @@ The browser analysis tool may calculate these as **triage signals**, not final c
 - route share,
 - route share by point value,
 - median choice time,
+- choice-time distribution by prompt,
 - route switching across prompts within a player/team if identity is available,
 - dominant-route rate.
+
+### Decision tension
+
+Decision tension is **not** a single automatic score. Review it from multiple signals:
+
+- at least two routes receive meaningful selection share,
+- route shares change when point values change,
+- choice time is non-trivial without becoming confusingly slow,
+- players report that multiple routes felt tempting,
+- one route is not an obvious default regardless of points,
+- success/guess-time differences plausibly justify the point spread.
+
+A prompt with instant choices can be excellent if the tradeoff is understood and varies across players. A prompt with long hesitation can be poor if the hesitation comes from ambiguity. Human review remains required.
 
 ### Performance
 
@@ -128,7 +145,9 @@ The browser analysis tool may calculate these as **triage signals**, not final c
 - prompt pass/timeout rate,
 - dominant route per prompt,
 - prompt-specific dead-card flags,
-- repeated “impossible/unfair” mentions.
+- repeated “impossible/unfair” mentions,
+- repeated “obvious choice” mentions,
+- decision-tension review status.
 
 ### Product health
 
@@ -147,6 +166,7 @@ These are deliberately conservative and remain **PROPOSED**:
 - Fewer than **3** observations on a prompt → `MORE DATA`, not a balance conclusion.
 - At least **3** observations and <35% observed success or ≥50% pass/timeout → `DEAD-CARD REVIEW`.
 - At least **4** committed observations and ≥75% routed through one method → `ROUTE DOMINANCE REVIEW`.
+- Repeated near-instant choices plus one-route dominance regardless of point spread → `DECISION-TENSION REVIEW`.
 - Dataset with multiple HUM/SOUND, timer-start, pass, or materially different build conditions → warn and segment before comparing.
 
 These thresholds exist to prioritize review. They are not automatic deletion, scoring, or rules decisions.
@@ -162,7 +182,7 @@ Promotion requires repeated playtest evidence supporting:
 - representability,
 - clear guess convergence,
 - audience/cultural fit,
-- meaningful point-driven choice,
+- meaningful point-driven choice / decision tension,
 - acceptable success/guess-time behavior,
 - no persistent accidental giveaway,
 - rights-safe use,

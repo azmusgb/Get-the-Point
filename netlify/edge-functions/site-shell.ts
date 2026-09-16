@@ -1,5 +1,5 @@
 const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'";
-const NAV_VERSION = "12";
+const NAV_VERSION = "13";
 
 const PATHS = [
   "/", "/home.html",
