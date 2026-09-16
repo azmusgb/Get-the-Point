@@ -2,6 +2,16 @@
 
 Use GitHub Issue #11 as the live checklist.
 
+## Automated prerequisites
+
+Before real-device sign-off, confirm all three automated layers are green on `main`:
+
+1. static release verifier,
+2. synthetic browser acceptance,
+3. live-Netlify production contract smoke.
+
+These reduce avoidable device-test noise but do not replace physical acceptance.
+
 ## Required first device
 
 **Physical iPhone running Safari** against the production deployment at `https://get-the-point.netlify.app`.
