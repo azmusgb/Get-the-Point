@@ -1,20 +1,37 @@
-# GET THE POINT
+# DECISIONS, DECISIONS
 
 Physical + digital social/party game prototype centered on **choice under time pressure**.
 
-> Historical project codename: **Decisions, Decisions**
+> **Current lead commercial working name:** DECISIONS, DECISIONS  
+> **Status:** CURRENT LEAD / PROPOSED / NEEDS LEGAL VALIDATION  
+> Repository and Netlify project identifiers still retain the historical `Get-the-Point` slug for continuity while legal validation remains open.
 
 ## Core mechanic
 
 **ONE PROMPT → MULTIPLE ROUTES → DIFFERENT RISK/REWARD → PLAYER CHOOSES → COMMITS → TEAM GUESSES**
 
-The current v2.1 challenger presents three routes in this order:
+The current challenger presents three routes in this order:
 
 1. **HUM** — teal
 2. **DRAW** — yellow
 3. **MIME** — purple
 
 The route labels/order/colors are still playtest variables. The core mechanic is not.
+
+## Brand direction v2.2
+
+The name describes the repeated micro-moment at the center of play:
+
+> Which route is worth taking for this prompt, right now, for these points?
+
+Current brand language:
+
+- **Primary descriptor:** ONE PROMPT. THREE WAYS TO PLAY.
+- **Functional UI:** YOUR MOVE · LOCKED IN · CORRECT · NEXT
+- **PROPOSED support line:** CHOOSE YOUR WAY. LOCK IT IN.
+- **PROPOSED explainer:** See the prompt. Weigh the points. Pick a way. Make them guess.
+
+The interface should not repeat the word “decision” everywhere. The title carries that attitude; gameplay copy stays functional.
 
 ## Current web surfaces
 
@@ -72,12 +89,30 @@ GitHub Actions also runs syntax checks and the zero-dependency release verifier 
 
 The dataset deliberately keeps separate HUM and SOUND scoring/representability estimates because the audio route remains unresolved. Prompts flagged `HOLD_AUDIO_RISK` are held for closer testing rather than silently promoted or deleted.
 
+### Decision tension
+
+A prompt now has an additional brand/product requirement: **the choice should be worth making**. Once prompt-specific points are considered, at least two routes should often feel plausibly attractive.
+
+Track and review:
+
+- route selected
+- milliseconds/seconds to choose
+- success/failure
+- time to guess
+- dead-card rate
+- pass use
+- dominant-route patterns
+- rule questions
+- player reaction
+- replay interest
+
 See:
 
 - `content/README.md` — prompt promotion/cut discipline
 - `PLAYTEST_EVIDENCE_SCHEMA_v0.6.md` — telemetry, session context, human feedback, and derived-metric contract
 - `BLIND_TEST_PROTOCOL_v0.6.md` — blind-test facilitation and validity rules
 - `PLAYTEST_ACCEPTANCE_v0.6.md` — device/gameplay acceptance gate
+- `PRODUCT_TRUTH.md` — repository mirror of current v2.2 product truth
 
 No prompt receives `VALIDATED_CORE` from desk review alone.
 
@@ -90,6 +125,7 @@ No prompt receives `VALIDATED_CORE` from desk review alone.
 - Commitment is irreversible once clueing begins.
 - Correct answers earn the selected route's points.
 - New groups should begin playing in roughly two minutes.
+- A good card creates a real tradeoff rather than a fake choice.
 
 ### PROPOSED / NEEDS PLAYTESTING
 
@@ -110,9 +146,17 @@ No prompt receives `VALIDATED_CORE` from desk review alone.
 
 Do not turn unresolved variables into permanent software assumptions.
 
+### NEEDS LEGAL VALIDATION
+
+- **DECISIONS, DECISIONS** as the final commercial name
+
+The earlier GET THE POINT identity is a former lead / benchmark fallback. The working-name decision is not legal approval.
+
 ## Repository structure
 
+- `home.html`, `css/home.css`, `public-demo.js` — public choice-first product experience
 - `play.html`, `play.js`, `css/game.css` — canonical PWA vertical slice and game state/UI
+- `site-nav.js` — shared navigation plus centralized replaceable public brand slot
 - `play-smart-card.js`, `css/game-smart-card.css` — isolated smart-card UX challenger; **PROPOSED / NEEDS PLAYTESTING**
 - `play-runtime.js` — viewport/runtime resilience without game-rule ownership
 - `playtest-enhancements.js` — blind-test presentation/feedback bridge without changing core rule state
@@ -120,7 +164,7 @@ Do not turn unresolved variables into permanent software assumptions.
 - `analysis.html`, `analysis.js` — protected local telemetry analysis
 - `feedback.html` — protected structured post-game Netlify form
 - `content/` — candidate prompt pool and content-promotion policy
-- `manifest.webmanifest`, `sw.js`, `icon.svg` — install/cache assets
+- `manifest.webmanifest`, `sw.js`, `icon.svg` — install/cache/identity assets
 - `netlify/edge-functions/` — public shell response hardening and private-demo access gate
 - `netlify.toml` — routing, caching, headers, historical routes
 - `scripts/verify-release.mjs` — repository/release invariant checks
@@ -128,22 +172,22 @@ Do not turn unresolved variables into permanent software assumptions.
 - `archive.html` — entry point for historical Tanner creative-direction work
 - `creative-direction-*`, `index.html`, `app.js`, legacy thank-you pages — historical research/prototype artifacts
 
-## Historical creative-direction work
+## Historical creative-direction and naming work
 
 The original Tanner questionnaire/studio files remain in the repository for provenance and comparison, but they are **not current product truth**. Use `/archive` to access them.
 
-Old references to **Decisions, Decisions**, old method mappings, or one-word-only prompt rules inside those historical files must not override current product decisions.
+Historical references to GET THE POINT, PICK YOUR POINT, earlier method mappings, or old prompt-format rules must not override current v2.2 decisions.
 
 ## Source authority
 
 When repository artifacts conflict, use this order:
 
-1. current project product truth / master decision register
-2. current rules, v2.1 design delta, and iOS PRD
+1. current DECISIONS, DECISIONS Product Truth v2.2 / Master Decision Register v2.2
+2. current rules, Brand + Product Design System v2.2, and iOS PRD v0.2
 3. current test protocols and datasets
 4. manufacturing, economics, legal/rights, and competitive research
-5. historical creative-direction files only for provenance
+5. historical creative-direction/naming files only for provenance
 
 ## Commercial note
 
-**GET THE POINT** is the lead commercial-name candidate, not a completed trademark clearance conclusion. Naming preference and legal clearance remain separate workstreams.
+**DECISIONS, DECISIONS** is the current lead working commercial title, not a completed trademark-clearance conclusion. Consumer validation and legal clearance remain separate workstreams. Do not rename the repository/domain or make irreversible commercial commitments solely from the working-name decision.
