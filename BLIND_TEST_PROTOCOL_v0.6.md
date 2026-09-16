@@ -1,4 +1,4 @@
-# GET THE POINT — Blind Playtest Protocol v0.6
+# DECISIONS, DECISIONS — Blind Playtest Protocol v0.6
 
 Status: **PROPOSED / NEEDS PLAYTESTING**
 
@@ -32,11 +32,12 @@ Record:
 - explanation/rule questions,
 - route chosen per prompt,
 - displayed route points,
-- choice time,
+- **choice time / hesitation before commitment**,
+- whether at least two routes appear genuinely plausible,
 - success/failure,
 - guess time,
 - skips/passes,
-- dead/impossible prompt reactions,
+- dead/impossible/obvious prompt reactions,
 - laughter / strong reaction moments,
 - accidental rule violations,
 - whether a route dominates regardless of points,
@@ -48,11 +49,12 @@ Record:
 1. Do players understand that **choosing the route is part of the game**?
 2. Do point values affect route choice?
 3. Do players make different choices for different prompts?
-4. Is one route selected habitually regardless of scoring?
-5. Does commitment create tension without creating confusion?
-6. Are failures funny rather than humiliating?
-7. Does the pace improve as the timer shortens?
-8. Does the group understand what to do after Correct without instruction?
+4. Do prompts create **decision tension** — at least two plausible routes once points are considered?
+5. Is one route selected habitually regardless of scoring?
+6. Does commitment create tension without creating confusion?
+7. Are failures funny rather than humiliating?
+8. Does the pace improve as the timer shortens?
+9. Does the group understand what to do after Correct without instruction?
 
 ## Current experimental variables
 
@@ -74,20 +76,26 @@ Ask before explaining product intent:
 2. “What was the most fun part?”
 3. “What was confusing?”
 4. “Did the point values change what you chose?”
-5. “Was there a route you avoided? Why?”
-6. “Which prompt felt impossible or unfair?”
-7. “Would you play again?”
-8. “Who would you play this with?”
+5. “How often did at least two routes feel genuinely tempting?”
+6. “Was there a route you avoided? Why?”
+7. “Which prompt felt impossible, obvious, or unfair?”
+8. “Would you play again?”
+9. “Who would you play this with?”
 
-Then ask unaided name recall after a short distraction if the naming study is intentionally part of that session. Keep naming-test packaging and neutral DRAW / ACT / SOUND conditions isolated from the v2.1 method study.
+## Naming-study firewall
+
+**DECISIONS, DECISIONS is the current lead working commercial title but still NEEDS LEGAL VALIDATION.** Do not convert ordinary game playtests into informal naming evidence.
+
+If name validation is intentionally part of a study, use the current dedicated naming protocol and controlled stimuli. Keep consumer preference, mechanic testing, and legal clearance as separate evidence streams. Historical GET THE POINT naming-test materials remain provenance, not current naming authority.
 
 ## Healthy signals
 
 - New groups begin in about two minutes.
 - Players explain the risk/reward mechanic back correctly.
 - Different routes are selected across prompts.
+- Prompt-specific points cause visible tradeoffs rather than automatic picks.
 - No route dominates independent of points.
-- Few prompts are called impossible.
+- Few prompts are called impossible or obvious.
 - Correct → next feels immediate.
 - 60 / 30 / 15 increases energy rather than confusion.
 - Players laugh at misses.
@@ -99,6 +107,7 @@ Then ask unaided name recall after a short distraction if the naming study is in
 - Players treat the three routes as unrelated mini-games.
 - Players pick one favorite route every time.
 - Point values are ignored.
+- Players instantly choose the same obvious route because the prompt/points create no tradeoff.
 - Players attempt to switch after commitment.
 - Several prompts are effectively impossible through one or more routes.
 - The phone becomes the center of attention instead of the social interaction.
